@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import container from '../dependency-injection';
 import { body } from 'express-validator';
-import { validateReqSchema } from '.'; 
+import { validateReqSchema } from '.';
 
 export const register = (router: Router) => {
   const reqSchema = [

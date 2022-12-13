@@ -4,20 +4,20 @@ import { Course } from '../../domain/Course';
 import { CourseRepository } from '../../domain/CourseRepository';
 
 export class FileCourseRepository implements CourseRepository {
-    private FILE_PATH = `${__dirname}/courses`;
+  private FILE_PATH = `${__dirname}/courses`;
 
-    async save(course: Course): Promise<void> {
-        fs.promises.writeFile(this.filePath(course.id), serialize(course));
-    }
-    
-    async search(courseId: string): Promise<Course> {
-        const courseData = await fs.promises.readFile(this.filePath(courseId));
-        const { id, name, duration } = deserialize(courseData);
+  async save(course: Course): Promise<void> {
+    fs.promises.writeFile(this.filePath(course.id), serialize(course));
+  }
 
-        return new Course({ id, name, duration });
-    }
+  async search(courseId: string): Promise<Course> {
+    const courseData = await fs.promises.readFile(this.filePath(courseId));
+    const { id, name, duration } = deserialize(courseData);
 
-    private filePath(id: String): string {
-        return `${this.FILE_PATH}.${id}.repo`;
-    }
+    return new Course({ id, name, duration });
+  }
+
+  private filePath(id: String): string {
+    return `${this.FILE_PATH}.${id}.repo`;
+  }
 }
