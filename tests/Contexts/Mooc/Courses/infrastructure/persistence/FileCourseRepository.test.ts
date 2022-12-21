@@ -9,7 +9,7 @@ const COURSE = {
 
 describe("FileCourseRepository", () => {
     it('should save a course', async () => {
-        const expectedCourse = new Course(COURSE);
+        const expectedCourse = new Course(COURSE.id, COURSE.name, COURSE.duration);
         const repository = new FileCourseRepository();
 
         await repository.save(expectedCourse);
