@@ -19,9 +19,10 @@
     "test:features": "npm run test:mooc:backend:features",
     "test:mooc:backend:features": "NODE_ENV=test CUCUMBER_PUBLISH_ENABLED=true cucumber-js -p mooc_backend",
     "build": "npm run build:clean && npm run build:tsc && npm run build:di",
+    "copy-assets": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
     "build:tsc": "tsc -p tsconfig.prod.json",
-    "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
-    "build:clean": "rm -r dist; exit 0"
+    "build:di": "npm run copy-assets",
+    "build:clean": "rmdir /S /Q dist"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -61,6 +62,7 @@
     "@types/node": "^16.10.2",
     "@types/nunjucks": "^3.2.0",
     "@types/supertest": "^2.0.11",
+    "cpx": "^1.5.0",
     "faker": "^5.5.3",
     "husky": "^7.0.2",
     "jest": "^27.2.4",
