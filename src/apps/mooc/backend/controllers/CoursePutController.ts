@@ -4,21 +4,21 @@ import { CourseCreator } from '../../../../Contexts/Mooc/Courses/application/Cou
 import { Controller } from './Controller';
 
 type CoursePutRequest = Request & {
-  body: {
-    id: string;
-    name: string;
-    duration: string;
-  };
+    body: {
+        id: string;
+        name: string;
+        duration: string;
+    };
 };
 
 export class CoursePutController implements Controller {
-  constructor(private courseCreator: CourseCreator) {}
+    constructor(private courseCreator: CourseCreator) {}
 
-  async run(req: CoursePutRequest, res: Response) {
-    const { id, name, duration} = req.body;
+    async run(req: CoursePutRequest, res: Response) {
+        const { id, name, duration} = req.body;
 
-    await this.courseCreator.run({ id, name, duration });
+        await this.courseCreator.run({ id, name, duration });
 
-    res.status(httpStatus.CREATED).send();
-  }
+        res.status(httpStatus.CREATED).send();
+    }
 }

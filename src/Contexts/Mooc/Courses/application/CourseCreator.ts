@@ -3,15 +3,15 @@ import { CourseRepository } from '../domain/CourseRepository';
 import { CourseCreatorRequest } from './CourseCreatorRequest';
 
 export class CourseCreator {
-  private readonly repository: CourseRepository;
+    private readonly repository: CourseRepository;
 
-  constructor(repository: CourseRepository) {
-    this.repository = repository;
-  }
+    constructor(repository: CourseRepository) {
+        this.repository = repository;
+    }
 
-  async run(request: CourseCreatorRequest): Promise<void> {
-    const course = new Course(request.id, request.name, request.duration);
+    async run(request: CourseCreatorRequest): Promise<void> {
+        const course = new Course(request.id, request.name, request.duration);
 
-    return this.repository.save(course);
-  }
+        return this.repository.save(course);
+    }
 }
