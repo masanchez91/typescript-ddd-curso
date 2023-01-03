@@ -18,10 +18,11 @@
     "start:mooc:backend": "NODE_ENV=production node dist/src/apps/mooc/backend/start",
     "test:features": "npm run test:mooc:backend:features",
     "test:mooc:backend:features": "NODE_ENV=test CUCUMBER_PUBLISH_ENABLED=true cucumber-js -p mooc_backend",
-    "build": "npm run build:clean && npm run build:tsc && npm run build:di",
+    "build": "npm run build:clean && npm run build:tsc && npm run build:copy",
+    "build:clean": "rimraf dist",
     "build:tsc": "tsc -p tsconfig.prod.json",
-    "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
-    "build:clean": "rimraf dist"
+    "build:copy": "copyfiles --all src/**/*.{json,yaml,html,png} dist"
+
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -31,7 +32,6 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
-    "copy": "^0.3.2",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
@@ -62,6 +62,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.30.0",
     "eslint-plugin-jsdoc": "^39.6.4",
     "faker": "^5.5.3",
