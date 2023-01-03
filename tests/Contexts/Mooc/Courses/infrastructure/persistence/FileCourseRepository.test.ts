@@ -7,7 +7,7 @@ const COURSE = {
     'duration': 'duration',
 };
 
-describe("FileCourseRepository", () => {
+describe('FileCourseRepository', () => {
     it('should save a course', async () => {
         const expectedCourse = new Course(COURSE.id, COURSE.name, COURSE.duration);
         const repository = new FileCourseRepository();
@@ -16,5 +16,5 @@ describe("FileCourseRepository", () => {
 
         const course = await repository.search('id');
         expect(course).toEqual(expectedCourse);
-    })
+    });
 });
