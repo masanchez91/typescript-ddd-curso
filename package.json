@@ -22,9 +22,10 @@
     "build:clean": "rimraf dist",
     "build:tsc": "tsc -p tsconfig.prod.json",
     "build:copy": "copyfiles --all src/**/*.{json,yaml,html,png} dist"
-
   },
   "dependencies": {
+    "@types/uuid": "^9.0.0",
+    "@types/uuid-validate": "^0.0.1",
     "body-parser": "^1.19.0",
     "bodybuilder": "^2.4.0",
     "bson": "^4.7.0",
@@ -43,6 +44,8 @@
     "nunjucks": "^3.2.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
+    "uuid": "^9.0.0",
+    "uuid-validate": "^0.0.3",
     "winston": "^3.3.3"
   },
   "devDependencies": {

@@ -1,6 +1,8 @@
 import { CourseCreator } from '../../../../../src/Contexts/Mooc/Courses/application/CourseCreator';
-import { Course } from '../../../../../src/Contexts/Mooc/Courses/domain/Course';
+import { CourseMother } from '../domain/CourseMother';
+import { CourseNameLengthExceeded } from '../../../../../src/Contexts/Mooc/Courses/domain/CourseNameLengthExceeded';
 import { CourseRepositoryMock } from '../__mocks__/CourseRepositoryMock';
+import { CreateCourseRequestMother } from './CreateCourseRequestMother';
 
 let repository: CourseRepositoryMock;
 let creator: CourseCreator;
@@ -12,14 +14,24 @@ beforeEach(() => {
 
 describe('CourseCreator', () => {
     it('should create a valid course', async () => {
-        const id = 'some-id';
-        const name = 'some-name';
-        const duration = 'some-duration';
+        const request = CreateCourseRequestMother.random();
 
-        const course = new Course(id, name, duration);
+        const course = CourseMother.fromRequest(request);
 
-        await creator.run({ id, name, duration });
+        await creator.run(request);
 
         repository.assertSaveHaveBeenCalledWith(course);
+    });
+
+    it('should throw error if course name length is exceeded', async () => {
+        expect(() => {
+            const request = CreateCourseRequestMother.invalidRequest();
+
+            const course = CourseMother.fromRequest(request);
+
+            creator.run(request);
+
+            repository.assertSaveHaveBeenCalledWith(course);
+        }).toThrow(CourseNameLengthExceeded);
     });
 });

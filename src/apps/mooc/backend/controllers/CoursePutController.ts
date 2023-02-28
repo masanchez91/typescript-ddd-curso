@@ -10,15 +10,16 @@ type CoursePutRequest = Request & {
         duration: string;
     };
 };
-
 export class CoursePutController implements Controller {
     constructor(private courseCreator: CourseCreator) {}
 
     async run(req: CoursePutRequest, res: Response) {
-        const { id, name, duration} = req.body;
-
-        await this.courseCreator.run({ id, name, duration });
-
-        res.status(httpStatus.CREATED).send();
+        try {
+            const { id, name, duration } = req.body;
+            await this.courseCreator.run({ id, name, duration });
+            res.status(httpStatus.CREATED).send();
+        } catch (error) {
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+        }
     }
 }

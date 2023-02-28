@@ -1,20 +1,14 @@
-import { Course } from '../../../../../../src/Contexts/Mooc/Courses/domain/Course';
 import { FileCourseRepository } from '../../../../../../src/Contexts/Mooc/Courses/infrastructure/persistence/FileCourseRepository';
-
-const COURSE = {
-    'id': 'id',
-    'name': 'name',
-    'duration': 'duration',
-};
+import { CourseMother } from '../../domain/CourseMother';
 
 describe('FileCourseRepository', () => {
     it('should save a course', async () => {
-        const expectedCourse = new Course(COURSE.id, COURSE.name, COURSE.duration);
         const repository = new FileCourseRepository();
+        const expectedCourse = CourseMother.random();
 
         await repository.save(expectedCourse);
 
-        const course = await repository.search('id');
+        const course = await repository.search(expectedCourse.id.value);
         expect(course).toEqual(expectedCourse);
     });
 });
